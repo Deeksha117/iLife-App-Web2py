@@ -1,0 +1,30 @@
+Web2py Mini Project – iLife App
+
+
+Objective : 
+An app to journal one's personal life.
+
+Modules to Implement :
+
+1. Account creation
+	Every user interested to maintain his/her personal journal needs to create 	an 	account with the app.
+
+2. Update Jounal - 
+	a. Writeups - 
+	Add new enteries to journal on the basis of calender day.
+	User can write travelogue & life event entries. 
+	b. Adding photos & videos -
+	Browse through files to pick photos and videos related to a particular date or 	event. 
+
+3. Display Timeline -
+	a. Search Events - 
+	Based on date of event, people tagged, occasions.
+	b. Printing -
+	Print the journal entries from the app.
+ 
+4. Events - 
+	a. Create/Delete event -
+	User can create his ow events like birthdays, hangouts, 	occasions etc. 		and can turn on/off the event alert for them
+	b. Event Alerts -
+	Daily email notifications to help user remember to write in the journal, 		birthday reminders
+
