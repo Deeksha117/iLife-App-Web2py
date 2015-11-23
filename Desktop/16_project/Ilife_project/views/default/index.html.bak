@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+<style>
+body
+    {
+        background-image:None !important
+    }
+</style>
+{{if 'message' in globals():}}
+
+{{pass}}
+
+<img src="/Ilife_project/static/images/index_bg.jpg" alt="Image could not be loaded"/>
+
+{{block left_sidebar}}
+<h2>Welcome to iLIFE</h2>
+<p class="lead">{{=T('What am I here for?')}}</p>
+  <p>
+
+{{=T('The iLife app allows you to maintain your personal journal to store your life events. Keep your memories safe with the !life app.')}}</li>
+</p>
+
+<p>
+    Get inspired and create your own Diary.
+It's intimate and fun.
+</p>
+{{end}}

@@ -1,0 +1,174 @@
+{{response.files.append(URL(r=request,c='static',f='css/ribbon.css'))}}
+{{response.files.append(URL(r=request,c='static',f='css/menu.css'))}}
+{{extend 'layout.html'}}
+{{left_sidebar_enabled=True,('message' in globals());
+right_sidebar_enabled=True,('message' in globals())}}
+
+<style>
+    div.w2p_export_menu {
+    margin: 5px 0px;
+    display: none;
+}
+.mood
+    {
+        width:50px;height:42px;
+    }
+abc.dropdown-menu{
+    padding :10px;
+width: 290px;
+    height: 70px;
+}
+    li
+    {list-style-type:none;}
+</style>
+<script>
+    function changebg(ele)
+    {
+        if(ele.id=="mood001")
+            document.body.style.backgroundImage = "url('/Ilife_project/static/images/happybg.jpg')";
+        else if(ele.id=="mood002")
+            document.body.style.backgroundImage = "url('/Ilife_project/static/images/majamabg')";
+        else if(ele.id=="mood003")
+            document.body.style.backgroundImage = "url('/Ilife_project/static/images/missubg.jpg')";
+        else if(ele.id=="mood004")
+            document.body.style.backgroundImage = "url('/Ilife_project/static/images/happybg.jpg')";
+    }
+function upload_photo()
+    { 
+        $("#myModal").modal('show');
+    }
+    function post_form()
+    {
+        //alert("here");
+        document.getElementById("centred").innerHTML='{{=form}}';
+        
+    }
+    
+    function event_form()
+    {
+        document.getElementById("centred").innerHTML='{{=eventform}}';
+    }
+    function update_event()
+    {
+        console.log('here');
+    }
+</script>
+<div id="centred">
+    <div>
+<h3>My Previous Posts...</h3>
+    {{=rows}}
+        </div>
+
+</div>
+
+{{block left_sidebar}}
+<div class="profile-usermenu" style="background-color : #ffffff;margin-top:1%;padding-top:4%;">
+    <div class="profile-userpic" >
+        {{ if profile_pic == None :}}
+        <img src="/Ilife_project/static/images/no_image.jpg" class="img-responsive" alt="img not found" style="width:90%"/>
+        {{pass}}
+        {{ if profile_pic != None :}}
+        <img src="{{=URL('download',args=profile_pic.prof_photo)}}" class="img-responsive" alt="img not in the pic found" style="width:90%"/>
+        {{pass}}
+	</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						{{=auth.user.first_name}}
+					</div>
+				</div>
+	<ul class="nav">
+        <li>
+							<a href="javascript:upload_photo()">
+							<i class="glyphicon glyphicon-camera"></i>
+							Upload Profile Pic </a>
+						</li>
+						<li class="active">
+							<a href="javascript:post_form()">
+							<i class="glyphicon glyphicon-pencil"></i>
+							New Post </a>
+						</li>
+						<li>
+							<a href="javascript:event_form()">
+							<i class="glyphicon glyphicon-plus"></i>
+							New Event </a>
+						</li>
+						<li>
+							<a href="javascript:window.location='{{=URL('timeline')}}'">
+							<i class="glyphicon glyphicon-road"></i>
+							View Timeline </a>
+						</li>
+                        <li>
+							<a href="javascript:window.location='{{=URL('updateevent')}}'">
+							<i class="glyphicon glyphicon-ok"></i>
+							Update/Del Event </a>
+						</li>
+						<li>
+							<a href="{{=URL('timeline', args =['myday'])}}">
+							<i class="glyphicon glyphicon-heart"></i>
+							Make My Day </a>
+						</li>
+					</ul>
+				</div>
+				<!-- END MENU -->
+
+
+
+ <br/>      
+<!--<br/>	<button class="btn btn-primary btn-block" onclick="post_form()">New Post</button>
+<br/>	<button class="btn btn-primary btn-block" id="New_Event" onclick="event_form()">New Event</button>
+<br/>	<button class="btn btn-primary btn-block" id="View_Timeline" onclick="window.location='{{=URL('timeline')}}'" >View Timeline</button>
+<br/>   <button class="btn btn-primary btn-block" id="my_day">Make my day!</button>-->
+{{end}}
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Upload Photo</h4>
+            </div>
+            <div class="modal-body">
+                {{=picform}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!--button type="button" class="btn btn-primary">Save changes</button-->
+            </div>
+        </div>
+    </div>
+</div>
+{{block right_sidebar}}
+<li id="abc" class="dropdown" style="">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="a:hover{text-decoration:none;}">
+                <h3><span class="label label-success">How do you feel!!</span></h3></a>
+            <ul class="dropdown-menu">
+                <ul class='list-inline'>
+                    <li><button class="mood" id="mood001" style="background-image: url(/Ilife_project/static/images/happy_50)" onclick="changebg(this)"/></a>
+                    </li>
+                    <li><button class="mood" id="mood002" style="background-image: url(/Ilife_project/static/images/majama_50)" onclick="changebg(this)"/></a>
+                    </li>
+                    <li><button class="mood" id="mood003" style="background-image: url(/Ilife_project/static/images/missu_50)" onclick="changebg(this)"/></a>
+                    </li>
+                    <li><button class="mood" id="mood004" style="background-image: url(/Ilife_project/static/images/thought_50)" onclick="changebg(this)"/></a>
+                    </li>
+                </ul>
+            </ul>
+        </li>
+ <br/>
+     <br/>
+ <div style="background-color:transparent;">
+      <h4 class="ribbon">
+      <strong class="ribbon-content"> Upcoming Events...</strong>
+      </h4>
+    <ul class="list-group">
+        {{for event in eventrow:}}
+        <li class="list-group-item list-group-item-success">
+            <div class="eventTitle">{{=event.title}}</div>
+            <div class="eventDesc"><i class="glyphicon glyphicon-time"></i> {{=event.dated}}</div>
+        </li>
+        {{pass}}
+    </ul>
+    </div>
+{{end}}

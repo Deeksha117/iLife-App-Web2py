@@ -1,0 +1,33 @@
+{{extend 'layout.html'}}
+<style>
+    div.w2p_export_menu {
+    margin: 5px 0px;
+    display: none;
+}
+</style>
+
+<h2>
+    Delete / Update Events
+</h2>
+{{=rows1}}
+{{block left_sidebar}}
+<div class="profile-usermenu" style="background-color : #ffffff;margin-top:1%;padding-top:4%;">
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						<h3>
+                            
+                        Hello {{=auth.user.first_name}}!!</h3>
+					</div>
+				</div>
+	<ul class="nav">
+    
+						<li>
+							<a href="javascript:window.location='{{=URL('timeline')}}'">
+							<i class="glyphicon glyphicon-road"></i>
+							View Timeline </a>
+						</li>
+    </ul>
+</div>
+{{end}}

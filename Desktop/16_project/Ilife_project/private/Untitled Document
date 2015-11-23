@@ -1,0 +1,13 @@
+import time
+    while True:
+        rows = db(db.life_event.status=='pending').select()
+        for row in rows:
+            if mail.send(to=user.auth.email,
+                subject=row.title,
+                message=row.description):
+                row.update_record(status='sent')
+            else:
+                row.update_record(status='failed')
+                db.commit()
+        response.flash = T("timer")
+        time.sleep(60) # check every minute

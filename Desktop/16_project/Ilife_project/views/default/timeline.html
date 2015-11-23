@@ -1,0 +1,91 @@
+{{response.files.append(URL(r=request,c='static',f='css/timeline.css'))}}
+{{extend 'layout.html'}}
+{{left_sidebar_enabled=False}}
+{{right_sidebar_enabled=False}}
+<style>
+#leftt
+    {display:none;}
+#centree
+    {
+        width:100% !important;
+    }
+#searchform
+    {
+        display:none;
+    }
+</style>
+<script>
+    function handle(this)
+    {
+        console.log="hey";
+        document.getElementById("searchform").style.display = "block";
+    }
+</script>
+<div class="container" style="width=100%">
+    <div class="page-header">
+        <h1 id="timeline">Timeline</h1>
+        <h4>
+            {{=titled}}
+        </h4>
+        <h5>
+            {{=subtitle}}
+        </h5>
+        <h6>
+            View Searchbox <input type='checkbox' onChange='document.getElementById("searchform").style.display = "block";'>
+        </h6>
+    </div>
+    <div id="searchform">
+    {{=form}}
+    </div>
+    <ul class="timeline">
+        {{if count>0:}}
+        {{ for i in range (0,len(rows) ):}}
+             {{ if int(i)%2==0 :}}
+                <li>
+                  {{ if rows[i].mood in ['Happy','Loved','Stupid','Cute'] :}}
+                       <div class="timeline-badge success"><i class="glyphicon glyphicon-thumbs-up"></i></div>
+                  {{else:}}
+                      <div class="timeline-badge danger"><i class="glyphicon glyphicon-thumbs-down"></i></div>
+                  {{pass}}
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">{{=rows[i].title}}</h4>
+                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{=rows[i].dated}}</small></p>
+                    </div>
+                    <div class="timeline-body">
+                      <p> {{=rows[i].contents}} </p>
+                        {{ if rows[i].picture != "" :}}
+                            <img src="{{=URL('download',args=rows[i].picture)}}" class="timeline-image"/>
+                        {{pass}}
+                    </div>
+                  </div>
+                </li>
+               {{else:}}
+                <li class="timeline-inverted">
+                  {{ if rows[i].mood in ['Happy','Loved','Stupid','Cute'] :}}
+                       <div class="timeline-badge success"><i class="glyphicon glyphicon-thumbs-up"></i></div>
+                  {{else:}}
+                      <div class="timeline-badge danger"><i class="glyphicon glyphicon-thumbs-down"></i></div>
+                  {{pass}}
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title">{{=rows[i].title}}</h4>
+                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{=rows[i].dated}}</small></p>
+                    </div>
+                    <div class="timeline-body">
+                      <p> {{=rows[i].contents}} </p>
+                        {{ if rows[i].picture != "" :}}
+                            <img src="{{=URL('download',args=rows[i].picture)}}" class="timeline-image"/>
+                        {{pass}}
+                    </div>
+                  </div>
+                </li>
+            {{pass}}
+            {{pass}}
+        {{else:}}
+        <div>
+            No record found matching your request
+        </div>
+        {{pass}}
+    </ul>
+</div>
